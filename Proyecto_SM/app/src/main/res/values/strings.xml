@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Proyecto_SM</string>
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac volutpat augue. Suspendisse finibus sapien ut feugiat venenatis.</string>
+    <string name="name">John Doe</string>
+    <string name="email">Email:</string>
+    <string name="password">Contraseña:</string>
+    <string name="entrar">Entrar</string>
+    <string name="also">tambien puedes</string>
+    <string name="crear">Crear cuenta nueva</string>
+    <string name="nombre">Nombre:</string>
+    <string name="telefono">Teléfono(opcional):</string>
+    <string name="direccion">Direccción(opcional):</string>
+    <string name="registrarse">Registrarse</string>
+    <string name="gmail">johndoe@gmail.com</string>
+    <string name="publicaciones">Publicaciones</string>
+    <string name="respuestas">Respuestas</string>
+    <string name="favoritos">Favoritos</string>
+    <string name="editar">Editar perfil</string>
+    <string name="publicacion">Publicación</string>
+    <string name="respuesta">Agrega una respuesta</string>
+    <string name="titulo">Ingrese un titulo</string>
+    <string name="contenido">Contenido de tu publicacion</string>
+    <string name="imagen">Agregar imagen</string>
+    <string name="borradores">Borradores</string>
+    <string name="pass">*******</string>
+    <string name="usuario">Nombre de usuario:</string>
+    <string name="login">Iniciar Sesión</string>
+    <string name="telefononoop">Telefono:</string>
+    <string name="direccionnoop">Dirección:</string>
+    <string name="publicar">Publicar</string>
+    <string name="titulop">Titulo</string>
+</resources>
