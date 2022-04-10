@@ -22,7 +22,7 @@
         android:layout_marginStart="117dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="116dp"
-        android:text="TextView"
+        android:text="@string/publicar"
         android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/iv_confirm_publish"
@@ -98,13 +98,15 @@
         android:layout_width="305dp"
         android:layout_height="48dp"
         android:layout_marginStart="17dp"
+        android:layout_marginTop="56dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
         android:hint="@string/titulo"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/imageView23"
-        tools:layout_editor_absoluteY="113dp" />
+        app:layout_constraintTop_toBottomOf="@+id/divider11" />
 
     <View
         android:id="@+id/divider11"

@@ -3,9 +3,30 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/fermo/Desktop/Universidad/Octavo/Sistemas Moviles/Proyecto-SM/Proyecto_SM/app/src/main/res/layout/activity_draft.xml" value="0.2210144927536232" />
+        <entry key="..\:/Users/fermo/Desktop/Universidad/Octavo/Sistemas Moviles/Proyecto-SM/Proyecto_SM/app/src/main/res/drawable-v24/profile_rounded.xml" value="0.2225" />
+        <entry key="..\:/Users/fermo/Desktop/Universidad/Octavo/Sistemas Moviles/Proyecto-SM/Proyecto_SM/app/src/main/res/drawable/ic_account_24.xml" value="0.2225" />
+        <entry key="..\:/Users/fermo/Desktop/Universidad/Octavo/Sistemas Moviles/Proyecto-SM/Proyecto_SM/app/src/main/res/drawable/ic_add_24.xml" value="0.2225" />
+        <entry key="..\:/Users/fermo/Desktop/Universidad/Octavo/Sistemas Moviles/Proyecto-SM/Proyecto_SM/app/src/main/res/drawable/ic_back_24.xml" value="0.2225" />
+        <entry key="..\:/Users/fermo/Desktop/Universidad/Octavo/Sistemas Moviles/Proyecto-SM/Proyecto_SM/app/src/main/res/drawable/ic_check_24.xml" value="0.2225" />
+        <entry key="..\:/Users/fermo/Desktop/Universidad/Octavo/Sistemas Moviles/Proyecto-SM/Proyecto_SM/app/src/main/res/drawable/ic_edit_24.xml" value="0.2225" />
+        <entry key="..\:/Users/fermo/Desktop/Universidad/Octavo/Sistemas Moviles/Proyecto-SM/Proyecto_SM/app/src/main/res/drawable/ic_exit_24.xml" value="0.2225" />
+        <entry key="..\:/Users/fermo/Desktop/Universidad/Octavo/Sistemas Moviles/Proyecto-SM/Proyecto_SM/app/src/main/res/drawable/ic_home_24.xml" value="0.2225" />
+        <entry key="..\:/Users/fermo/Desktop/Universidad/Octavo/Sistemas Moviles/Proyecto-SM/Proyecto_SM/app/src/main/res/drawable/ic_image_24.xml" value="0.2225" />
+        <entry key="..\:/Users/fermo/Desktop/Universidad/Octavo/Sistemas Moviles/Proyecto-SM/Proyecto_SM/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2225" />
+        <entry key="..\:/Users/fermo/Desktop/Universidad/Octavo/Sistemas Moviles/Proyecto-SM/Proyecto_SM/app/src/main/res/drawable/ic_next_24.xml" value="0.2225" />
+        <entry key="..\:/Users/fermo/Desktop/Universidad/Octavo/Sistemas Moviles/Proyecto-SM/Proyecto_SM/app/src/main/res/drawable/ic_person_24.xml" value="0.2225" />
+        <entry key="..\:/Users/fermo/Desktop/Universidad/Octavo/Sistemas Moviles/Proyecto-SM/Proyecto_SM/app/src/main/res/drawable/ic_search_24.xml" value="0.2225" />
+        <entry key="..\:/Users/fermo/Desktop/Universidad/Octavo/Sistemas Moviles/Proyecto-SM/Proyecto_SM/app/src/main/res/drawable/ic_settings_24.xml" value="0.2225" />
+        <entry key="..\:/Users/fermo/Desktop/Universidad/Octavo/Sistemas Moviles/Proyecto-SM/Proyecto_SM/app/src/main/res/drawable/ic_star_24.xml" value="0.2225" />
+        <entry key="..\:/Users/fermo/Desktop/Universidad/Octavo/Sistemas Moviles/Proyecto-SM/Proyecto_SM/app/src/main/res/layout/activity_draft.xml" value="0.33" />
         <entry key="..\:/Users/fermo/Desktop/Universidad/Octavo/Sistemas Moviles/Proyecto-SM/Proyecto_SM/app/src/main/res/layout/activity_edit.xml" value="0.2210144927536232" />
         <entry key="..\:/Users/fermo/Desktop/Universidad/Octavo/Sistemas Moviles/Proyecto-SM/Proyecto_SM/app/src/main/res/layout/activity_login.xml" value="0.2210144927536232" />
+        <entry key="..\:/Users/fermo/Desktop/Universidad/Octavo/Sistemas Moviles/Proyecto-SM/Proyecto_SM/app/src/main/res/layout/activity_main.xml" value="0.2210144927536232" />
+        <entry key="..\:/Users/fermo/Desktop/Universidad/Octavo/Sistemas Moviles/Proyecto-SM/Proyecto_SM/app/src/main/res/layout/activity_post.xml" value="0.25" />
+        <entry key="..\:/Users/fermo/Desktop/Universidad/Octavo/Sistemas Moviles/Proyecto-SM/Proyecto_SM/app/src/main/res/layout/activity_profile.xml" value="0.2210144927536232" />
+        <entry key="..\:/Users/fermo/Desktop/Universidad/Octavo/Sistemas Moviles/Proyecto-SM/Proyecto_SM/app/src/main/res/layout/activity_publish.xml" value="0.2210144927536232" />
+        <entry key="..\:/Users/fermo/Desktop/Universidad/Octavo/Sistemas Moviles/Proyecto-SM/Proyecto_SM/app/src/main/res/layout/activity_register.xml" value="0.2210144927536232" />
+        <entry key="..\:/Users/fermo/Desktop/Universidad/Octavo/Sistemas Moviles/Proyecto-SM/Proyecto_SM/app/src/main/res/layout/activity_search.xml" value="0.2210144927536232" />
         <entry key="..\:/Users/fermo/Desktop/Universidad/Octavo/Sistemas Moviles/Proyecto-SM/Proyecto_SM/app/src/main/res/layout/item_post.xml" value="0.2210144927536232" />
         <entry key="..\:/Users/fermo/Desktop/Universidad/Octavo/Sistemas Moviles/Proyecto_SM/app/src/main/res/drawable-v24/button_rounded.xml" value="0.2395" />
         <entry key="..\:/Users/fermo/Desktop/Universidad/Octavo/Sistemas Moviles/Proyecto_SM/app/src/main/res/drawable-v24/button_rounded_border.xml" value="0.2395" />
