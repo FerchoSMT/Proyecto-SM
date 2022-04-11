@@ -1,13 +1,30 @@
 package com.psm.proyecto_sm.Models
 
-data class User (
-    var id:String ="",
-    var username:String="",
-    var name: String="",
-    var email:String ="",
-    var password:String="",
-    var pfp:String ="",
-    var register_date:String =""
-);
+class User {
+    var id_user: String = ""
+    var name: String = ""
+    var last_name: String = ""
+    var email: String = ""
+    var password: String = ""
+    var phone: String = ""
+    var profile_picture: String = ""
+    var register_date: String = ""
+
+    fun seePosts() {
+
+    }
+
+    fun seeReplies() {
+
+    }
+
+    fun seeFavorites() {
+
+    }
+
+    fun update() {
+
+    }
+}
 
 
