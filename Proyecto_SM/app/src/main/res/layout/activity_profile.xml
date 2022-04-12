@@ -10,7 +10,7 @@
         android:layout_width="44dp"
         android:layout_height="37dp"
         android:layout_marginStart="50dp"
-        android:layout_marginBottom="17dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/ic_home_24" />
@@ -20,11 +20,9 @@
         android:layout_width="44dp"
         android:layout_height="38dp"
         android:layout_marginStart="90dp"
-        android:layout_marginTop="7dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_main_profile"
-        app:layout_constraintTop_toBottomOf="@+id/divider7"
         app:srcCompat="@drawable/ic_search_24" />
 
     <ImageView
@@ -33,7 +31,7 @@
         android:layout_height="38dp"
         android:layout_marginStart="86dp"
         android:layout_marginEnd="54dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_search_profile"
@@ -43,10 +41,14 @@
         android:id="@+id/divider7"
         android:layout_width="409dp"
         android:layout_height="1dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
         android:background="?android:attr/listDivider"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView"
-        tools:layout_editor_absoluteX="1dp" />
+        app:layout_constraintBottom_toTopOf="@+id/iv_main_profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
 
     <ImageView
         android:id="@+id/iv_pfpic_profile"
@@ -184,8 +186,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="409dp"
-        android:layout_height="447dp"
+        android:layout_width="410dp"
+        android:layout_height="461dp"
         android:layout_marginStart="1dp"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="1dp"
