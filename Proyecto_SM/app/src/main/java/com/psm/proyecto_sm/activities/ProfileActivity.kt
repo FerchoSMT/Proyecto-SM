@@ -3,10 +3,19 @@ package com.psm.proyecto_sm.activities
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.psm.proyecto_sm.Models.DatabaseHelper
+import com.psm.proyecto_sm.Models.ImageController
+import com.psm.proyecto_sm.Models.User
+import com.psm.proyecto_sm.Models.UserLogged
 import com.psm.proyecto_sm.R
 import kotlinx.android.synthetic.main.activity_profile.*
 
 class ProfileActivity : AppCompatActivity() {
+
+    var userAux = User()
+
+    private lateinit var db : DatabaseHelper
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
@@ -19,6 +28,18 @@ class ProfileActivity : AppCompatActivity() {
         iv_main_profile.setOnClickListener{gotoMain()}
         iv_search_profile.setOnClickListener{gotoSearch()}
         iv_profile_profile.setOnClickListener{gotoProfile()}
+
+        db = DatabaseHelper(applicationContext)
+
+        if (UserLogged.userId != null) {
+            userAux = db.readUser(UserLogged.userId!!)
+            txt_name_profile.setText(userAux.name)
+            txt_email_profile.setText(userAux.email)
+            val profilePicBmp = ImageController.getImageBitmap(userAux)
+            if (profilePicBmp != null) {
+                iv_pfpic_profile.setImageBitmap(profilePicBmp)
+            }
+        }
     }
 
     private fun gotoProfile() {

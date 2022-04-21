@@ -160,16 +160,6 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_content_post"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-    <TextView
-        android:id="@+id/tv_hour_post"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="13dp"
-        android:text="10:00 a.m."
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_image1_post" />
-
     <ImageView
         android:id="@+id/iv_like_post"
         android:layout_width="wrap_content"
@@ -220,10 +210,10 @@
         android:id="@+id/tv_date_post"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="13dp"
-        android:text="01/01/2022"
-        app:layout_constraintStart_toEndOf="@+id/tv_hour_post"
+        android:text="2022-01-01 10:00:00"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_image1_post" />
 
     <EditText
