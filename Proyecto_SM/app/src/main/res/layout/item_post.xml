@@ -19,7 +19,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/txtTitle2"
+                android:id="@+id/txtContent_Post"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -29,11 +29,11 @@
                 android:textColor="#020202"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/imgAlbumCard"
-                app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
+                app:layout_constraintStart_toEndOf="@+id/iv_pfp_itempost"
+                app:layout_constraintTop_toBottomOf="@+id/txtTitle_Post" />
 
             <ImageView
-                android:id="@+id/imgAlbumCard"
+                android:id="@+id/iv_pfp_itempost"
                 android:layout_width="63dp"
                 android:layout_height="58dp"
                 android:layout_marginStart="4dp"
@@ -47,7 +47,7 @@
                 tools:srcCompat="@drawable/ic_account_24" />
 
             <TextView
-                android:id="@+id/txtTitle"
+                android:id="@+id/txtTitle_Post"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -58,27 +58,27 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/imgAlbumCard"
+                app:layout_constraintStart_toEndOf="@+id/iv_pfp_itempost"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/iv_img1_itempost"
                 android:layout_width="126dp"
                 android:layout_height="84dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="12dp"
-                app:layout_constraintStart_toEndOf="@+id/imgAlbumCard"
-                app:layout_constraintTop_toBottomOf="@+id/txtTitle2"
+                app:layout_constraintStart_toEndOf="@+id/iv_pfp_itempost"
+                app:layout_constraintTop_toBottomOf="@+id/txtContent_Post"
                 tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
             <ImageView
-                android:id="@+id/imageView4"
+                android:id="@+id/iv_img2_itempost"
                 android:layout_width="126dp"
                 android:layout_height="84dp"
                 android:layout_marginStart="28dp"
                 android:layout_marginTop="12dp"
-                app:layout_constraintStart_toEndOf="@+id/imageView2"
-                app:layout_constraintTop_toBottomOf="@+id/txtTitle2"
+                app:layout_constraintStart_toEndOf="@+id/iv_img1_itempost"
+                app:layout_constraintTop_toBottomOf="@+id/txtContent_Post"
                 tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

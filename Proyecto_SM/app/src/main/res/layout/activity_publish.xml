@@ -16,19 +16,19 @@
         app:srcCompat="@drawable/ic_back_24" />
 
     <TextView
-        android:id="@+id/textView27"
+        android:id="@+id/txt_drafts"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="117dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="116dp"
-        android:text="@string/publicar"
+        android:layout_marginStart="180dp"
+        android:layout_marginTop="20dp"
+        android:background="#FFFFFF"
+        android:text="@string/borradores"
         android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/iv_confirm_publish"
         app:layout_constraintStart_toEndOf="@+id/iv_back_publish"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/publicar" />
+        tools:text="@string/borradores" />
 
     <ImageView
         android:id="@+id/iv_confirm_publish"
@@ -41,7 +41,7 @@
         app:srcCompat="@drawable/ic_check_24" />
 
     <ImageView
-        android:id="@+id/imageView23"
+        android:id="@+id/iv_pfpic_publish"
         android:layout_width="57dp"
         android:layout_height="60dp"
         android:layout_marginStart="16dp"
@@ -52,31 +52,29 @@
 
     <ImageView
         android:id="@+id/iv_image_publish"
-        android:layout_width="73dp"
-        android:layout_height="72dp"
-        android:layout_marginStart="136dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="90dp"
         android:layout_marginTop="41dp"
-        android:layout_marginBottom="265dp"
+        android:layout_marginBottom="200dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_content_post"
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/ic_image_24" />
 
-    <TextView
-        android:id="@+id/textView28"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_marginEnd="54dp"
-        android:layout_marginBottom="280dp"
-        android:text="@string/imagen"
-        android:textColor="#000000"
-        android:textSize="16sp"
+    <ImageView
+        android:id="@+id/iv_image_publish2"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="41dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="200dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.272"
-        app:layout_constraintStart_toEndOf="@+id/iv_image_publish" />
+        app:layout_constraintTop_toBottomOf="@+id/et_content_post"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/ic_image_24" />
 
     <EditText
         android:id="@+id/et_content_post"
@@ -105,7 +103,7 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/imageView23"
+        app:layout_constraintStart_toEndOf="@+id/iv_pfpic_publish"
         app:layout_constraintTop_toBottomOf="@+id/divider11" />
 
     <View

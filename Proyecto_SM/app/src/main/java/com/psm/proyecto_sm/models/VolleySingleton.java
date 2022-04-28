@@ -1,4 +1,4 @@
-package com.psm.proyecto_sm.Models;
+package com.psm.proyecto_sm.models;
 
 import android.content.Context;
 

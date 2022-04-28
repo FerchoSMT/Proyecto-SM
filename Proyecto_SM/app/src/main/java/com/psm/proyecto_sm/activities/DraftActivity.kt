@@ -4,15 +4,32 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.psm.proyecto_sm.R
+import com.psm.proyecto_sm.adapters.DraftsAdapter
+import com.psm.proyecto_sm.models.DatabaseHelper
+import com.psm.proyecto_sm.models.Post
+import com.psm.proyecto_sm.models.User
+import com.psm.proyecto_sm.models.UserLogged
 import kotlinx.android.synthetic.main.activity_draft.*
 
 class DraftActivity : AppCompatActivity() {
+
+    private lateinit var recyclerViewDrafts : RecyclerView
+    private lateinit var draftsAdapter : DraftsAdapter
+    private lateinit var db : DatabaseHelper
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_draft)
 
         iv_back_draft.setOnClickListener{gobacktoMain()}
+
+        db = DatabaseHelper(applicationContext)
+        this.recyclerViewDrafts = findViewById<RecyclerView>(R.id.rv_draft)
+
+        setUpRecyclerView()
     }
 
     private fun gobacktoMain() {
@@ -22,5 +39,26 @@ class DraftActivity : AppCompatActivity() {
         finish()
     }
 
-    // TODO: Adaptador para hacer click en cualquier draft y abrir PublishActivity con la info del Draft
+    private fun setUpRecyclerView() {
+        var draftsParam : MutableList<Post> = mutableListOf()
+        draftsAdapter = DraftsAdapter(draftsParam)
+        recyclerViewDrafts.apply {
+            adapter = draftsAdapter
+            layoutManager = LinearLayoutManager(context)
+        }
+        draftsAdapter.setOnItemClickListener(object : DraftsAdapter.onItemClickListener{
+            override fun onItemClick(position: Int) {
+                val intent = Intent(this@DraftActivity, PublishActivity::class.java)
+                intent.putExtra("IdPost", draftsParam[position].id_post)
+                intent.putExtra("IsDraft", true)
+                startActivity(intent)
+                finish()
+            }
+        })
+
+        var userAux = User()
+        userAux.id_user = UserLogged.userId
+
+        userAux.seeDrafts(db, draftsAdapter)
+    }
 }

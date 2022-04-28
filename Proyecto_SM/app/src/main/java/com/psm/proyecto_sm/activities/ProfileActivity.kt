@@ -2,16 +2,15 @@ package com.psm.proyecto_sm.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.inputmethod.InputBinding
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.psm.proyecto_sm.Models.DatabaseHelper
-import com.psm.proyecto_sm.Models.ImageController
-import com.psm.proyecto_sm.Models.User
-import com.psm.proyecto_sm.Models.UserLogged
-import com.psm.proyecto_sm.ProfileFavorites
-import com.psm.proyecto_sm.ProfilePosts
-import com.psm.proyecto_sm.ProfileReplies
+import com.psm.proyecto_sm.models.DatabaseHelper
+import com.psm.proyecto_sm.models.ImageController
+import com.psm.proyecto_sm.models.User
+import com.psm.proyecto_sm.models.UserLogged
+import com.psm.proyecto_sm.fragments.ProfileFavorites
+import com.psm.proyecto_sm.fragments.ProfilePosts
+import com.psm.proyecto_sm.fragments.ProfileReplies
 import com.psm.proyecto_sm.R
 import com.psm.proyecto_sm.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_profile.*
@@ -29,18 +28,15 @@ class ProfileActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater);
         //setContentView(binding.root);
 
-
         txt_posts_profile.setOnClickListener{
             replaceFragment(ProfilePosts())
         }
-
         txt_favorites_profile.setOnClickListener{
             replaceFragment(ProfileFavorites())
         }
         txt_replies_profile.setOnClickListener{
             replaceFragment(ProfileReplies())
         }
-
 
         iv_edit_profile.setOnClickListener{gotoEdit()}
         iv_signout_profile.setOnClickListener{signOut()}
@@ -55,7 +51,7 @@ class ProfileActivity : AppCompatActivity() {
             userAux = db.readUser(UserLogged.userId!!)
             txt_name_profile.setText(userAux.name)
             txt_email_profile.setText(userAux.email)
-            val profilePicBmp = ImageController.getImageBitmap(userAux)
+            val profilePicBmp = ImageController.getImageBitmap(userAux.profile_picture)
             if (profilePicBmp != null) {
                 iv_pfpic_profile.setImageBitmap(profilePicBmp)
             }
@@ -87,19 +83,10 @@ class ProfileActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun showFavorites() {
-        TODO("Mostrar posts favoritos")
-    }
-
-    private fun showReplies() {
-        TODO("Mostrar respuestas del usuario")
-    }
-
-    private fun showPosts() {
-        TODO("Mostrar posts del usuario")
-    }
-
     private fun signOut() {
+        UserLogged.userId = null
+        UserLogged.userProfilePic = null
+
         val intent = Intent(this, LoginActivity::class.java)
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
         startActivity(intent)

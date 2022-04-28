@@ -52,10 +52,27 @@
         <entry key="..\:/Users/fermo/Desktop/Universidad/Octavo/Sistemas Moviles/Proyecto_SM/app/src/main/res/layout/item_draft_2.xml" value="0.25" />
         <entry key="..\:/Users/fermo/Desktop/Universidad/Octavo/Sistemas Moviles/Proyecto_SM/app/src/main/res/layout/item_post.xml" value="0.25" />
         <entry key="..\:/Users/fermo/Desktop/Universidad/Octavo/Sistemas Moviles/Proyecto_SM/app/src/main/res/layout/item_post_2.xml" value="0.25" />
+        <entry key="..\:/xampp/htdocs/Proyecto-SM/Proyecto_SM/app/src/main/res/drawable/ic_edit_24.xml" value="0.1945" />
+        <entry key="..\:/xampp/htdocs/Proyecto-SM/Proyecto_SM/app/src/main/res/drawable/ic_next_24.xml" value="0.1945" />
+        <entry key="..\:/xampp/htdocs/Proyecto-SM/Proyecto_SM/app/src/main/res/drawable/ic_star_24.xml" value="0.1945" />
+        <entry key="..\:/xampp/htdocs/Proyecto-SM/Proyecto_SM/app/src/main/res/layout/activity_draft.xml" value="0.16944444444444445" />
+        <entry key="..\:/xampp/htdocs/Proyecto-SM/Proyecto_SM/app/src/main/res/layout/activity_edit.xml" value="0.16944444444444445" />
+        <entry key="..\:/xampp/htdocs/Proyecto-SM/Proyecto_SM/app/src/main/res/layout/activity_login.xml" value="0.20416666666666666" />
+        <entry key="..\:/xampp/htdocs/Proyecto-SM/Proyecto_SM/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
         <entry key="..\:/xampp/htdocs/Proyecto-SM/Proyecto_SM/app/src/main/res/layout/activity_post.xml" value="0.20416666666666666" />
+        <entry key="..\:/xampp/htdocs/Proyecto-SM/Proyecto_SM/app/src/main/res/layout/activity_profile.xml" value="0.20416666666666666" />
+        <entry key="..\:/xampp/htdocs/Proyecto-SM/Proyecto_SM/app/src/main/res/layout/activity_publish.xml" value="0.16944444444444445" />
         <entry key="..\:/xampp/htdocs/Proyecto-SM/Proyecto_SM/app/src/main/res/layout/activity_register.xml" value="0.20416666666666666" />
+        <entry key="..\:/xampp/htdocs/Proyecto-SM/Proyecto_SM/app/src/main/res/layout/activity_search.xml" value="0.20416666666666666" />
+        <entry key="..\:/xampp/htdocs/Proyecto-SM/Proyecto_SM/app/src/main/res/layout/fragment_profile_favorites.xml" value="0.16944444444444445" />
+        <entry key="..\:/xampp/htdocs/Proyecto-SM/Proyecto_SM/app/src/main/res/layout/fragment_profile_posts.xml" value="0.20416666666666666" />
+        <entry key="..\:/xampp/htdocs/Proyecto-SM/Proyecto_SM/app/src/main/res/layout/fragment_profile_responses.xml" value="0.20416666666666666" />
         <entry key="..\:/xampp/htdocs/Proyecto-SM/Proyecto_SM/app/src/main/res/layout/item_coment.xml" value="0.20416666666666666" />
         <entry key="..\:/xampp/htdocs/Proyecto-SM/Proyecto_SM/app/src/main/res/layout/item_comment_2.xml" value="0.20416666666666666" />
+        <entry key="..\:/xampp/htdocs/Proyecto-SM/Proyecto_SM/app/src/main/res/layout/item_draft.xml" value="0.16944444444444445" />
+        <entry key="..\:/xampp/htdocs/Proyecto-SM/Proyecto_SM/app/src/main/res/layout/item_draft_2.xml" value="0.16944444444444445" />
+        <entry key="..\:/xampp/htdocs/Proyecto-SM/Proyecto_SM/app/src/main/res/layout/item_post.xml" value="0.16944444444444445" />
+        <entry key="..\:/xampp/htdocs/Proyecto-SM/Proyecto_SM/app/src/main/res/menu/options_menu.xml" value="0.20416666666666666" />
       </map>
     </option>
   </component>

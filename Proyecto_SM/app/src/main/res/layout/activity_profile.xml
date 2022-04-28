@@ -87,11 +87,9 @@
         android:id="@+id/iv_edit_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="105dp"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="31dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txt_name_profile"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_edit_24" />
 
@@ -99,11 +97,9 @@
         android:id="@+id/iv_signout_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="43dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="31dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txt_email_profile"
         app:layout_constraintTop_toBottomOf="@+id/iv_edit_profile"
         app:srcCompat="@drawable/ic_exit_24" />
 
@@ -185,7 +181,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainer"
-        android:name="com.psm.proyecto_sm.ProfilePosts"
+        android:name="com.psm.proyecto_sm.fragments.ProfilePosts"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="1dp"
