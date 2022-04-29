@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/iv_pfp_edit"
         android:layout_width="119dp"
         android:layout_height="104dp"
@@ -15,6 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:shapeAppearanceOverlay="@style/circular"
         app:srcCompat="@drawable/ic_person_24" />
 
     <TextView

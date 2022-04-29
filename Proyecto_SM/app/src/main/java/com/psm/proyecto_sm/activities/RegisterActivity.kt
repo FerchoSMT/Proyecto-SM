@@ -11,6 +11,7 @@ import com.psm.proyecto_sm.models.ImageController
 import com.psm.proyecto_sm.models.User
 import com.psm.proyecto_sm.R
 import kotlinx.android.synthetic.main.activity_register.*
+import java.util.regex.Pattern
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -49,6 +50,7 @@ class RegisterActivity : AppCompatActivity() {
         if (userAux.name!!.isEmpty()) { et_username_register.setError("Nombre vacío") }
         else if (userAux.email!!.isEmpty()) { et_email_register.setError("Email vacío") }
         else if (userAux.password!!.isEmpty()) { et_password_register.setError("Contraseña vacía") }
+        else if(!isValidPassword(userAux.password!!)){ et_password_register.setError("Usar una mayuscula, un numero y un caracter especial") }
         else if (!db.validEmailUser(userAux.email, 0)) { et_email_register.setError("Email ya utilizado") }
         else {
             progressDialog = ProgressDialog(this)
@@ -82,5 +84,12 @@ class RegisterActivity : AppCompatActivity() {
                 iv_image_register.setImageURI(imageUri)
             }
         }
+    }
+
+    fun isValidPassword(password : String): Boolean {
+        val passwordPattern = "^(?=.[0-9])(?=.[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$"
+        val pattern = Pattern.compile(passwordPattern)
+        val matcher = pattern.matcher(password)
+        return matcher.matches()
     }
 }

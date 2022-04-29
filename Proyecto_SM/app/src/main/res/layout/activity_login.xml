@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_person_24" />
+        app:srcCompat="@drawable/Logo" />
 
     <TextView
         android:id="@+id/textView"
@@ -73,6 +73,7 @@
         android:ems="10"
         android:hint="@string/pass"
         android:inputType="textPersonName"
+        android:password="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
