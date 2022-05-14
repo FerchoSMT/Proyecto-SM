@@ -4,10 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.psm.proyecto_sm.models.DatabaseHelper
-import com.psm.proyecto_sm.models.ImageController
+import com.psm.proyecto_sm.Utils.DatabaseHelper
+import com.psm.proyecto_sm.Utils.ImageController
 import com.psm.proyecto_sm.models.User
-import com.psm.proyecto_sm.models.UserLogged
+import com.psm.proyecto_sm.Utils.UserLogged
 import com.psm.proyecto_sm.fragments.ProfileFavorites
 import com.psm.proyecto_sm.fragments.ProfilePosts
 import com.psm.proyecto_sm.fragments.ProfileReplies

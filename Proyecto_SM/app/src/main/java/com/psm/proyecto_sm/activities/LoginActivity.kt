@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.psm.proyecto_sm.R
-import com.psm.proyecto_sm.models.DatabaseHelper
+import com.psm.proyecto_sm.Utils.DatabaseHelper
 import com.psm.proyecto_sm.models.User
 import kotlinx.android.synthetic.main.activity_login.*
 

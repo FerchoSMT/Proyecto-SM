@@ -1,4 +1,4 @@
-package com.psm.proyecto_sm.models
+package com.psm.proyecto_sm.Utils
 
 import android.app.Activity
 import android.content.Context
@@ -6,6 +6,8 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
+import com.psm.proyecto_sm.models.Post
+import com.psm.proyecto_sm.models.User
 
 object ImageController {
 

@@ -1,4 +1,4 @@
-package com.psm.proyecto_sm.models
+package com.psm.proyecto_sm.Utils
 
 object UserLogged {
     var userId: Long? = null

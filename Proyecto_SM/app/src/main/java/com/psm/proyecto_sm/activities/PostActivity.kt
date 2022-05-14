@@ -1,21 +1,21 @@
 package com.psm.proyecto_sm.activities
 
 import android.content.Intent
-import android.media.Image
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.PopupMenu
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.psm.proyecto_sm.R
+import com.psm.proyecto_sm.Utils.DatabaseHelper
+import com.psm.proyecto_sm.Utils.ImageController
+import com.psm.proyecto_sm.Utils.UserLogged
 import com.psm.proyecto_sm.adapters.RepliesAdapter
 import com.psm.proyecto_sm.models.*
 import kotlinx.android.synthetic.main.activity_post.*
-import kotlinx.android.synthetic.main.item_draft.*
 import java.lang.Exception
 
 class PostActivity : AppCompatActivity() {

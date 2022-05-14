@@ -1,5 +1,6 @@
 package com.psm.proyecto_sm.models
 
+import com.psm.proyecto_sm.Utils.DatabaseHelper
 import com.psm.proyecto_sm.adapters.RepliesAdapter
 
 class Post : Content {

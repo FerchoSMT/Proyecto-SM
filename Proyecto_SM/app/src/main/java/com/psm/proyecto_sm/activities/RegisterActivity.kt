@@ -6,8 +6,8 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.psm.proyecto_sm.models.DatabaseHelper
-import com.psm.proyecto_sm.models.ImageController
+import com.psm.proyecto_sm.Utils.DatabaseHelper
+import com.psm.proyecto_sm.Utils.ImageController
 import com.psm.proyecto_sm.models.User
 import com.psm.proyecto_sm.R
 import kotlinx.android.synthetic.main.activity_register.*

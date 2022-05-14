@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.psm.proyecto_sm.R
 import com.psm.proyecto_sm.adapters.PostsAdapter
-import com.psm.proyecto_sm.models.DatabaseHelper
+import com.psm.proyecto_sm.Utils.DatabaseHelper
 import com.psm.proyecto_sm.models.Post
 import kotlinx.android.synthetic.main.activity_main.*
 

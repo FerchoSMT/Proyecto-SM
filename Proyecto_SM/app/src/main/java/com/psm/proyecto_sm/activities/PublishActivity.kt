@@ -9,10 +9,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.psm.proyecto_sm.R
-import com.psm.proyecto_sm.models.DatabaseHelper
-import com.psm.proyecto_sm.models.ImageController
+import com.psm.proyecto_sm.Utils.DatabaseHelper
+import com.psm.proyecto_sm.Utils.ImageController
 import com.psm.proyecto_sm.models.Post
-import com.psm.proyecto_sm.models.UserLogged
+import com.psm.proyecto_sm.Utils.UserLogged
 import kotlinx.android.synthetic.main.activity_publish.*
 
 class PublishActivity : AppCompatActivity() {

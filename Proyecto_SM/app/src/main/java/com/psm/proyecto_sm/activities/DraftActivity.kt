@@ -2,16 +2,15 @@ package com.psm.proyecto_sm.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.psm.proyecto_sm.R
 import com.psm.proyecto_sm.adapters.DraftsAdapter
-import com.psm.proyecto_sm.models.DatabaseHelper
+import com.psm.proyecto_sm.Utils.DatabaseHelper
 import com.psm.proyecto_sm.models.Post
 import com.psm.proyecto_sm.models.User
-import com.psm.proyecto_sm.models.UserLogged
+import com.psm.proyecto_sm.Utils.UserLogged
 import kotlinx.android.synthetic.main.activity_draft.*
 
 class DraftActivity : AppCompatActivity() {

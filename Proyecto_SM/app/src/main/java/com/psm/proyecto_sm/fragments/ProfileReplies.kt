@@ -1,7 +1,6 @@
 package com.psm.proyecto_sm.fragments
 
 import android.content.Intent
-import android.icu.text.Replaceable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,10 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.psm.proyecto_sm.R
 import com.psm.proyecto_sm.activities.PostActivity
 import com.psm.proyecto_sm.adapters.RepliesAdapter
-import com.psm.proyecto_sm.models.DatabaseHelper
+import com.psm.proyecto_sm.Utils.DatabaseHelper
 import com.psm.proyecto_sm.models.Reply
 import com.psm.proyecto_sm.models.User
-import com.psm.proyecto_sm.models.UserLogged
+import com.psm.proyecto_sm.Utils.UserLogged
 
 class ProfileReplies : Fragment() {
 

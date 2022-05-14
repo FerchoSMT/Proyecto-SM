@@ -1,5 +1,7 @@
 package com.psm.proyecto_sm.models
 
+import com.psm.proyecto_sm.Utils.DatabaseHelper
+import com.psm.proyecto_sm.Utils.UserLogged
 import com.psm.proyecto_sm.adapters.DraftsAdapter
 import com.psm.proyecto_sm.adapters.PostsAdapter
 import com.psm.proyecto_sm.adapters.RepliesAdapter

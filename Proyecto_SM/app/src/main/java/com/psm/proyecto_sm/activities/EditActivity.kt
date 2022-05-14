@@ -7,10 +7,10 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.psm.proyecto_sm.R
-import com.psm.proyecto_sm.models.DatabaseHelper
-import com.psm.proyecto_sm.models.ImageController
+import com.psm.proyecto_sm.Utils.DatabaseHelper
+import com.psm.proyecto_sm.Utils.ImageController
 import com.psm.proyecto_sm.models.User
-import com.psm.proyecto_sm.models.UserLogged
+import com.psm.proyecto_sm.Utils.UserLogged
 import kotlinx.android.synthetic.main.activity_edit.*
 
 class EditActivity : AppCompatActivity() {

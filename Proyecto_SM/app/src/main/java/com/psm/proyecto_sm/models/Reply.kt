@@ -1,5 +1,7 @@
 package com.psm.proyecto_sm.models
 
+import com.psm.proyecto_sm.Utils.DatabaseHelper
+
 class Reply : Content {
     var id_reply: Long? = null
     var content: String? = null

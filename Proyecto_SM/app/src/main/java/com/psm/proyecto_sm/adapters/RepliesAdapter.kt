@@ -5,9 +5,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.psm.proyecto_sm.R
-import com.psm.proyecto_sm.models.ImageController
+import com.psm.proyecto_sm.Utils.ImageController
 import com.psm.proyecto_sm.models.Reply
-import com.psm.proyecto_sm.models.UserLogged
+import com.psm.proyecto_sm.Utils.UserLogged
 import kotlinx.android.synthetic.main.item_comment_2.view.*
 
 class RepliesAdapter(val replies: MutableList<Reply>) : RecyclerView.Adapter<RepliesAdapter.RepliesViewHolder>() {

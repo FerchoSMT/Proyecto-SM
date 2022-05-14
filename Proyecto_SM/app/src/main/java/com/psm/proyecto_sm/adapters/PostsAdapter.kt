@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.psm.proyecto_sm.R
-import com.psm.proyecto_sm.models.ImageController
+import com.psm.proyecto_sm.Utils.ImageController
 import com.psm.proyecto_sm.models.Post
 import kotlinx.android.synthetic.main.item_post.view.*
 
