@@ -34,9 +34,6 @@ class PostActivity : AppCompatActivity() {
         setContentView(R.layout.activity_post)
 
         iv_back_post.setOnClickListener{gobacktoMain()}
-        iv_home_post.setOnClickListener{gobacktoMain()}
-        iv_search_post.setOnClickListener{gotoSearch()}
-        iv_profile_post.setOnClickListener{gotoProfile()}
         iv_settings_post.setOnClickListener{openSettings()}
         iv_like_post.setOnClickListener{likePost()}
         iv_send_post.setOnClickListener{sendReply()}
@@ -173,21 +170,16 @@ class PostActivity : AppCompatActivity() {
         }
     }
 
-    private fun gotoProfile() {
-        val intent = Intent(this, ProfileActivity::class.java)
-        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
-        startActivity(intent)
-        finish()
-    }
-
-    private fun gotoSearch() {
-        val intent = Intent(this, SearchActivity::class.java)
-        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
-        startActivity(intent)
-        finish()
-    }
-
     private fun gobacktoMain() {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+        startActivity(intent)
+        finish()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+
         val intent = Intent(this, MainActivity::class.java)
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
         startActivity(intent)

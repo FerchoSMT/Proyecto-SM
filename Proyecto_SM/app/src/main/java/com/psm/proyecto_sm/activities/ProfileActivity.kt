@@ -99,4 +99,13 @@ class ProfileActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+
+        val intent = Intent(this, MainActivity::class.java)
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+        startActivity(intent)
+        finish()
+    }
 }
