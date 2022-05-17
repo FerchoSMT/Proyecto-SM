@@ -1,11 +1,11 @@
 <?php
-include("config.php");
+require_once $_SERVER['DOCUMENT_ROOT'] . './phpApi/model/config.php';
 
 
 $title = $_POST['title'];
 $content = $_POST['content'];
 $id_user = $_POST['id_user'];
-
+//Cambiar en sentencia para update
 $sql = 'INSERT INTO POSTS (?,?,?,?,?,?);';
 
 $statement = $this->con->prepare($sql);

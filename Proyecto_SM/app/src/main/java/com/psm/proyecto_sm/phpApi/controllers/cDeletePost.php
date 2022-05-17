@@ -1,5 +1,5 @@
 <?php
-include("config.php");
+require_once $_SERVER['DOCUMENT_ROOT'] . './phpApi/model/config.php';
 
 $id_post = $_POST['id_post'];
 

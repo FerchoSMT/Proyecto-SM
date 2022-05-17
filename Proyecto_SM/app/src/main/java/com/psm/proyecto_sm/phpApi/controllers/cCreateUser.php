@@ -1,5 +1,5 @@
 <?php
-include("config.php");
+require_once $_SERVER['DOCUMENT_ROOT'] . './phpApi/model/config.php';
 
 $name = $_POST['name'];
 $email = $_POST['email'];
@@ -9,7 +9,7 @@ $address = $_POST['address'];
 $profilePic = file_get_contents(addslashes($_FILES["profilePic"]["tmp_name"]));
 
 //ver como pasar profilePic de la manera correcta;
-$sql = 'INSERT INTO USERS (?,?,?,?,?,?);';
+$sql = 'INSERT INTO USERS (name,email,password,phone,address,profilePic) VALUES (?,?,?,?,?,?);';
 
 $statement = $this->con->prepare($sql);
 $statement->bindParam(1,$name);

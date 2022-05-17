@@ -1,5 +1,5 @@
 <?php
-include("config.php");
+require_once $_SERVER['DOCUMENT_ROOT'] . './phpApi/model/config.php';
 
 $id_reply = $_POST['id_reply'];
 $content = $_POST['content'];
@@ -14,7 +14,7 @@ $statement = $this->con->prepare($sql);
 $statement->bindParam(1,$id_reply);
 $statement->bindParam(2,$content);
 $statement->bindParam(3,$id_user);
-$statement->bindParam(7,$id_post);
+$statement->bindParam(4,$id_post);
 $statement->execute();
 
 ?>

@@ -1,5 +1,5 @@
 <?php
-include("config.php");
+require_once $_SERVER['DOCUMENT_ROOT'] . './phpApi/model/config.php';
 
 $id_user =$_POST['id_user']
 $name = $_POST['name'];

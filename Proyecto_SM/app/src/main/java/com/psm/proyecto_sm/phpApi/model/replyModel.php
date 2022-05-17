@@ -16,13 +16,10 @@ class ReplyModel {
     public function addReply($id_post, $id_user, $id_reply, $content, $replied_date, $name_user,$img_user){
         $this->id_post = $id_post;
         $this->id_user = $id_user;
-        $this->title = $title;
+        $this->id_reply = $id_reply;
         $this->content = $content;
-        $this->favorites = $favorites;
-        $this->isDraft = $isDraft;
-        $this->posted_date = $posted_date;
-        $this->isDraft = $isDraft;
-        $this->image1 = $image1;
-        $this->image2 = $image2;
+        $this->replied_date = $replied_date;
+        $this->name_user = $name_user;
+        $this->img_user = $img_user;
     }
 }
