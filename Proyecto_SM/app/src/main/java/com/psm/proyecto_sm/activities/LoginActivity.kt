@@ -2,11 +2,16 @@ package com.psm.proyecto_sm.activities
 
 import android.app.ProgressDialog
 import android.content.Intent
+import android.content.IntentFilter
+import android.net.ConnectivityManager
 import android.os.Bundle
+import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.psm.proyecto_sm.R
 import com.psm.proyecto_sm.Utils.DatabaseHelper
+import com.psm.proyecto_sm.Utils.NetworkChangeListener
 import com.psm.proyecto_sm.models.User
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -15,12 +20,24 @@ class LoginActivity : AppCompatActivity() {
 
     var userAux = User()
 
+    var networkChangeListener = NetworkChangeListener()
+
     private lateinit var progressDialog : ProgressDialog
     private lateinit var db : DatabaseHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        /*val crashButton = Button(this)
+        crashButton.text = "Test Crash"
+        crashButton.setOnClickListener {
+            throw RuntimeException("Test Crash") // Force a crash
+        }
+
+        addContentView(crashButton, ViewGroup.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT))*/
 
         btn_login_login.setOnClickListener{loginUser()}
         btn_register_login.setOnClickListener{gotoRegister()}
@@ -57,5 +74,18 @@ class LoginActivity : AppCompatActivity() {
             }
 
         }
+    }
+
+    override fun onStart() {
+        var filter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
+        registerReceiver(networkChangeListener, filter)
+
+        super.onStart()
+    }
+
+    override fun onStop() {
+        unregisterReceiver(networkChangeListener)
+
+        super.onStop()
     }
 }
