@@ -37,9 +37,13 @@ class PostsAdapter(val posts: MutableList<Post>) : RecyclerView.Adapter<PostsAda
     override fun getItemCount() = posts.size
 
     fun addItem(post: Post) {
-        if (!this.isItemAdded(post.id_post!!))
+        if (!this.isItemAdded(post.id_post!!)) {
             posts.add(post)
-        this.notifyDataSetChanged()
+            posts.sortByDescending {
+                it.posted_date
+            }
+            this.notifyDataSetChanged()
+        }
     }
 
     fun isItemAdded(idPost: Long) : Boolean {
