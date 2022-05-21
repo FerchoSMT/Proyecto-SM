@@ -38,8 +38,15 @@ public class DatabaseHost {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void createUser(Context context, String url, User user) {
 
-        String encodedString = Base64.getEncoder().encodeToString(user.getProfile_picture());
-        String strEncodedImage = "data:image/png;base64," + encodedString;
+        String encodedString, strEncodedImage;
+
+        if (user.getProfile_picture() != null) {
+            encodedString = Base64.getEncoder().encodeToString(user.getProfile_picture());
+            strEncodedImage = "data:image/png;base64," + encodedString;
+        }
+        else {
+            strEncodedImage = "";
+        }
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {

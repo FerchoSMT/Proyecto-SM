@@ -31,10 +31,12 @@ import java.util.*
 
 class ProfileActivity : AppCompatActivity() {
 
+    val URL_READUSERS = "http://cursoswelearn.xyz/phpApi/controllers/cReadUsers.php"
     val URL_READPOSTS = "http://cursoswelearn.xyz/phpApi/controllers/cReadPosts.php"
     val URL_READREPLIES = "http://cursoswelearn.xyz/phpApi/controllers/cReadReplies.php"
     val URL_READFAVS = "http://cursoswelearn.xyz/phpApi/controllers/cReadFavorites.php"
 
+    var listUsers : MutableList<User> = mutableListOf()
     var listPosts : MutableList<Post> = mutableListOf()
     var listReplies : MutableList<Reply> = mutableListOf()
     var listFavs : MutableList<Favorites> = mutableListOf()
@@ -83,22 +85,13 @@ class ProfileActivity : AppCompatActivity() {
         networkConnection.observe(this) { isConnected ->
             if (isConnected) {
                 DataManager.isConnected = true
+                getUsers()
                 getPosts()
                 getReplies()
                 getFavorites()
             }
             else {
                 DataManager.isConnected = false
-            }
-        }
-
-        if (DataManager.userId != null) {
-            userAux = db.readUser(DataManager.userId!!)
-            txt_name_profile.setText(userAux.name)
-            txt_email_profile.setText(userAux.email)
-            val profilePicBmp = ImageController.getImageBitmap(userAux.profile_picture)
-            if (profilePicBmp != null) {
-                iv_pfpic_profile.setImageBitmap(profilePicBmp)
             }
         }
 
@@ -153,6 +146,60 @@ class ProfileActivity : AppCompatActivity() {
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
         startActivity(intent)
         finish()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun getUsers() {
+
+        var stringRequest = StringRequest(Request.Method.GET, URL_READUSERS, { response ->
+
+            try {
+                var array = JSONArray(response)
+                for (i in 0 until array.length()) {
+
+                    var jsonObject = array.getJSONObject(i)
+
+                    var user = User()
+                    user.id_user = jsonObject.getLong("id_user")
+                    user.name = jsonObject.getString("name")
+                    user.email = jsonObject.getString("email")
+                    user.password = jsonObject.getString("password")
+                    user.phone = jsonObject.getString("phone")
+                    user.address = jsonObject.getString("address")
+
+                    val imageStr = jsonObject.getString("profile_picture")
+                    if (imageStr.isNotEmpty()) {
+                        val image = imageStr.replace("data:image/png;base64,", "")
+                        user.profile_picture = Base64.getDecoder().decode(image)
+                    }
+
+                    user.register_date = jsonObject.getString("register_date")
+
+                    listUsers.add(user)
+                }
+
+            } catch (e : Exception) {
+                Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show()
+            } finally {
+                db.getUsersFromDbHost(listUsers)
+
+                if (DataManager.userId != null) {
+                    userAux = db.readUser(DataManager.userId!!)
+                    txt_name_profile.setText(userAux.name)
+                    txt_email_profile.setText(userAux.email)
+                    val profilePicBmp = ImageController.getImageBitmap(userAux.profile_picture)
+                    if (profilePicBmp != null) {
+                        iv_pfpic_profile.setImageBitmap(profilePicBmp)
+                    }
+                }
+            }
+
+        }, { error ->
+            Toast.makeText(this, error.toString(), Toast.LENGTH_LONG).show()
+        })
+
+        Volley.newRequestQueue(this).add(stringRequest)
+
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

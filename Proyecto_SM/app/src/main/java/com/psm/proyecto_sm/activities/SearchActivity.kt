@@ -1,5 +1,6 @@
 package com.psm.proyecto_sm.activities
 
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -29,6 +30,8 @@ class SearchActivity : AppCompatActivity() {
     var listPosts : MutableList<Post> = mutableListOf()
 
     private lateinit var networkConnection: NetworkConnection
+
+    private lateinit var progressDialog: ProgressDialog
 
     private lateinit var recyclerViewPosts : RecyclerView
     private lateinit var postsAdapter : PostsAdapter
@@ -112,6 +115,10 @@ class SearchActivity : AppCompatActivity() {
         var stringRequest = StringRequest(Request.Method.GET, URL_SEARCHPOSTS, { response ->
 
             try {
+                progressDialog = ProgressDialog(this)
+                progressDialog.setMessage("Buscando...")
+                progressDialog.show()
+
                 var array = JSONArray(response)
                 for (i in 0 until array.length()) {
 
