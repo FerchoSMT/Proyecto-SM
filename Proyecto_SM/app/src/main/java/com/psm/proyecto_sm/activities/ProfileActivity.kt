@@ -1,27 +1,52 @@
 package com.psm.proyecto_sm.activities
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.psm.proyecto_sm.Utils.DatabaseHelper
-import com.psm.proyecto_sm.Utils.ImageController
+import com.android.volley.Request
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
+import com.psm.proyecto_sm.utils.DatabaseHelper
+import com.psm.proyecto_sm.utils.ImageController
 import com.psm.proyecto_sm.models.User
-import com.psm.proyecto_sm.Utils.UserLogged
+import com.psm.proyecto_sm.utils.DataManager
 import com.psm.proyecto_sm.fragments.ProfileFavorites
 import com.psm.proyecto_sm.fragments.ProfilePosts
 import com.psm.proyecto_sm.fragments.ProfileReplies
 import com.psm.proyecto_sm.R
 import com.psm.proyecto_sm.databinding.ActivityMainBinding
+import com.psm.proyecto_sm.models.Favorites
+import com.psm.proyecto_sm.models.Post
+import com.psm.proyecto_sm.models.Reply
+import com.psm.proyecto_sm.utils.NetworkConnection
 import kotlinx.android.synthetic.main.activity_profile.*
+import org.json.JSONArray
+import org.json.JSONObject
+import java.lang.Exception
+import java.util.*
 
 class ProfileActivity : AppCompatActivity() {
 
+    val URL_READPOSTS = "http://cursoswelearn.xyz/phpApi/controllers/cReadPosts.php"
+    val URL_READREPLIES = "http://cursoswelearn.xyz/phpApi/controllers/cReadReplies.php"
+    val URL_READFAVS = "http://cursoswelearn.xyz/phpApi/controllers/cReadFavorites.php"
+
+    var listPosts : MutableList<Post> = mutableListOf()
+    var listReplies : MutableList<Reply> = mutableListOf()
+    var listFavs : MutableList<Favorites> = mutableListOf()
+
     var userAux = User()
+
+    private lateinit var networkConnection: NetworkConnection
 
     private lateinit var db : DatabaseHelper
     lateinit var binding: ActivityMainBinding
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
@@ -38,7 +63,14 @@ class ProfileActivity : AppCompatActivity() {
             replaceFragment(ProfileReplies())
         }
 
-        iv_edit_profile.setOnClickListener{gotoEdit()}
+        iv_edit_profile.setOnClickListener{
+            if (DataManager.isConnected) {
+                gotoEdit()
+            }
+            else {
+                DataManager.connectionAlert(this)
+            }
+        }
         iv_signout_profile.setOnClickListener{signOut()}
 
         iv_main_profile.setOnClickListener{gotoMain()}
@@ -47,8 +79,21 @@ class ProfileActivity : AppCompatActivity() {
 
         db = DatabaseHelper(applicationContext)
 
-        if (UserLogged.userId != null) {
-            userAux = db.readUser(UserLogged.userId!!)
+        networkConnection = NetworkConnection(application)
+        networkConnection.observe(this) { isConnected ->
+            if (isConnected) {
+                DataManager.isConnected = true
+                getPosts()
+                getReplies()
+                getFavorites()
+            }
+            else {
+                DataManager.isConnected = false
+            }
+        }
+
+        if (DataManager.userId != null) {
+            userAux = db.readUser(DataManager.userId!!)
             txt_name_profile.setText(userAux.name)
             txt_email_profile.setText(userAux.email)
             val profilePicBmp = ImageController.getImageBitmap(userAux.profile_picture)
@@ -56,6 +101,7 @@ class ProfileActivity : AppCompatActivity() {
                 iv_pfpic_profile.setImageBitmap(profilePicBmp)
             }
         }
+
     }
 
     private fun replaceFragment(fragment: Fragment){
@@ -84,8 +130,8 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun signOut() {
-        UserLogged.userId = null
-        UserLogged.userProfilePic = null
+        DataManager.userId = null
+        DataManager.userProfilePic = null
 
         val intent = Intent(this, LoginActivity::class.java)
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
@@ -107,5 +153,141 @@ class ProfileActivity : AppCompatActivity() {
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
         startActivity(intent)
         finish()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun getPosts() {
+
+        var stringRequest = StringRequest(Request.Method.GET, URL_READPOSTS, { response ->
+
+            try {
+                var array = JSONArray(response)
+                for (i in 0 until array.length()) {
+
+                    var jsonObject = array.getJSONObject(i)
+
+                    var postAux = Post()
+                    postAux.id_post = jsonObject.getLong("id_post")
+                    postAux.title = jsonObject.getString("title")
+                    postAux.content = jsonObject.getString("content")
+                    postAux.favorites = jsonObject.getInt("favorites")
+                    postAux.is_draft = jsonObject.getInt("is_draft") == 1
+                    postAux.posted_date = jsonObject.getString("posted_date")
+                    postAux.is_deleted = jsonObject.getInt("is_deleted") == 1
+                    postAux.id_user = jsonObject.getLong("id_user")
+
+                    val imageStrA = jsonObject.getString("imageA")
+                    if (imageStrA.isNotEmpty()) {
+                        val imageA = imageStrA.replace("data:image/png;base64,", "")
+                        postAux.imageA = Base64.getDecoder().decode(imageA)
+                    }
+
+                    val imageStrB = jsonObject.getString("imageB")
+                    if (imageStrB.isNotEmpty()) {
+                        val imageB = imageStrB.replace("data:image/png;base64,", "")
+                        postAux.imageB = Base64.getDecoder().decode(imageB)
+                    }
+
+                    postAux.name_user = jsonObject.getString("name_user")
+
+                    val imageStrC = jsonObject.getString("img_user")
+                    if (imageStrC.isNotEmpty()) {
+                        val imageC = imageStrC.replace("data:image/png;base64,", "")
+                        postAux.img_user = Base64.getDecoder().decode(imageC)
+                    }
+
+                    listPosts.add(postAux)
+
+                }
+
+            } catch (e : Exception) {
+                Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show()
+            } finally {
+                db.getPostsFromDbHost(listPosts)
+            }
+
+        }, { error ->
+            Toast.makeText(this, error.toString(), Toast.LENGTH_LONG).show()
+        })
+
+        Volley.newRequestQueue(this).add(stringRequest)
+
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun getReplies() {
+
+        var stringRequest = StringRequest(Request.Method.GET, URL_READREPLIES, { response ->
+
+            try {
+                var array = JSONArray(response)
+                for (i in 0 until array.length()) {
+
+                    var jsonObject = array.getJSONObject(i)
+
+                    var replyAux = Reply()
+                    replyAux.id_reply = jsonObject.getLong("id_reply")
+                    replyAux.content = jsonObject.getString("content")
+                    replyAux.replied_date = jsonObject.getString("replied_date")
+                    replyAux.is_deleted = jsonObject.getInt("is_deleted") == 1
+                    replyAux.id_user = jsonObject.getLong("id_user")
+                    replyAux.id_post = jsonObject.getLong("id_post")
+                    replyAux.name_user = jsonObject.getString("name_user")
+
+                    val imageStr = jsonObject.getString("img_user")
+                    if (imageStr.isNotEmpty()) {
+                        val image = imageStr.replace("data:image/png;base64,", "")
+                        replyAux.img_user = Base64.getDecoder().decode(image)
+                    }
+
+                    listReplies.add(replyAux)
+
+                }
+
+            } catch (e: Exception) {
+                Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show()
+            } finally {
+                db.getRepliesFromDbHost(listReplies)
+            }
+
+        }, { error ->
+            Toast.makeText(this, error.toString(), Toast.LENGTH_LONG).show()
+        })
+
+        Volley.newRequestQueue(this).add(stringRequest)
+
+    }
+
+    private fun getFavorites() {
+
+        var stringRequest = StringRequest(Request.Method.GET, URL_READFAVS, { response ->
+
+            try {
+                var array = JSONArray(response)
+                for (i in 0 until array.length()) {
+
+                    var jsonObject = array.getJSONObject(i)
+
+                    var favAux = Favorites()
+                    favAux.id_fav = jsonObject.getLong("id_fav")
+                    favAux.favorite = jsonObject.getInt("favorite") == 1
+                    favAux.id_user = jsonObject.getLong("id_user")
+                    favAux.id_post = jsonObject.getLong("id_post")
+
+                    listFavs.add(favAux)
+                }
+
+            } catch (e: Exception) {
+                Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show()
+            } finally {
+                db.getFavoritesFromDbHost(listFavs)
+            }
+
+        }, { error ->
+            Toast.makeText(this, error.toString(), Toast.LENGTH_LONG).show()
+        })
+
+        Volley.newRequestQueue(this).add(stringRequest)
+
     }
 }

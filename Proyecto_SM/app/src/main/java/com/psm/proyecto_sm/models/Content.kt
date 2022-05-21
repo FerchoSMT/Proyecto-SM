@@ -1,9 +1,9 @@
 package com.psm.proyecto_sm.models
 
-import com.psm.proyecto_sm.Utils.DatabaseHelper
+import android.content.Context
 
 interface Content {
-    fun create(db : DatabaseHelper) : Long
-    fun update(db : DatabaseHelper)
-    fun delete(db : DatabaseHelper)
+    fun create(context: Context, url: String)
+    fun update(context: Context, url: String)
+    fun delete(context: Context, url: String)
 }

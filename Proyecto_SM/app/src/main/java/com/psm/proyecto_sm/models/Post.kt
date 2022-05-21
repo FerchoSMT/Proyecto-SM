@@ -1,7 +1,11 @@
 package com.psm.proyecto_sm.models
 
-import com.psm.proyecto_sm.Utils.DatabaseHelper
+import android.content.Context
+import android.os.Build
+import androidx.annotation.RequiresApi
+import com.psm.proyecto_sm.utils.DatabaseHelper
 import com.psm.proyecto_sm.adapters.RepliesAdapter
+import com.psm.proyecto_sm.utils.DatabaseHost
 
 class Post : Content {
     var id_post: Long? = null
@@ -10,40 +14,42 @@ class Post : Content {
     var favorites: Int? = null
     var is_draft: Boolean? = false
     var posted_date: String? = null
+    var is_deleted: Boolean? = false
     var id_user: Long? = null
 
-    var images: MutableList<ByteArray> = mutableListOf()
+    var imageA: ByteArray? = null
+    var imageB: ByteArray? = null
 
     var name_user: String? = null
     var img_user: ByteArray? = null
 
-    override fun create(db: DatabaseHelper) : Long {
-        var post_id = db.createPost(this)
-
-        return post_id
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun create(context: Context, url: String) {
+        var db = DatabaseHost()
+        db.createPost(context, url, this)
     }
 
-    override fun update(db: DatabaseHelper) {
-        db.updatePost(this)
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun update(context: Context, url: String) {
+        var db = DatabaseHost()
+        db.updatePost(context, url, this)
     }
 
-    override fun delete(db: DatabaseHelper) {
-        db.deletePost(this)
+    override fun delete(context: Context, url: String) {
+        var db = DatabaseHost()
+        db.deletePost(context, url)
     }
 
-    fun saveDraft(db: DatabaseHelper) {
-        db.createDraftPost(this)
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun saveDraft(context: Context, url: String) {
+        var db = DatabaseHost()
+        db.saveDraft(context, url, this)
     }
 
-    fun updateDraft(db: DatabaseHelper) {
-        db.updateDraftPost(this)
+    fun updateDraft(context: Context, url: String, idPost: Long) {
+        var db = DatabaseHost()
+        db.updateDraft(context, url, idPost)
     }
 
-    fun getReplies(db: DatabaseHelper, adapter: RepliesAdapter) {
-        var listReplies = db.readPostReplies(this.id_post!!)
-        for (reply in listReplies) {
-            adapter.addItem(reply)
-        }
-    }
 }
 

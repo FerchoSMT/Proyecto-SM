@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.psm.proyecto_sm.R
-import com.psm.proyecto_sm.Utils.ImageController
+import com.psm.proyecto_sm.utils.ImageController
 import com.psm.proyecto_sm.models.Post
 import kotlinx.android.synthetic.main.item_post.view.*
 
@@ -67,17 +67,17 @@ class PostsAdapter(val posts: MutableList<Post>) : RecyclerView.Adapter<PostsAda
             }
             view.txtTitle_Post.setText(post.title)
             view.txtContent_Post.setText(post.content)
-            if (post.images.size == 0) {
+            if (post.imageA == null && post.imageB == null) {
                 view.iv_img1_itempost.visibility = View.GONE
                 view.iv_img2_itempost.visibility = View.GONE
             }
-            else if (post.images.size == 1) {
-                view.iv_img1_itempost.setImageBitmap(ImageController.getImageBitmap(post.images[0]))
+            else if (post.imageA != null && post.imageB == null) {
+                view.iv_img1_itempost.setImageBitmap(ImageController.getImageBitmap(post.imageA))
                 view.iv_img2_itempost.visibility = View.GONE
             }
-            else if (post.images.size == 2){
-                view.iv_img1_itempost.setImageBitmap(ImageController.getImageBitmap(post.images[0]))
-                view.iv_img2_itempost.setImageBitmap(ImageController.getImageBitmap(post.images[1]))
+            else if (post.imageA != null && post.imageB != null){
+                view.iv_img1_itempost.setImageBitmap(ImageController.getImageBitmap(post.imageA))
+                view.iv_img2_itempost.setImageBitmap(ImageController.getImageBitmap(post.imageB))
             }
         }
 

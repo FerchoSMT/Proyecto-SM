@@ -1,4 +1,4 @@
-package com.psm.proyecto_sm.Utils
+package com.psm.proyecto_sm.utils
 
 import android.app.Activity
 import android.content.Context
@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.util.Log
 import com.psm.proyecto_sm.models.Post
 import com.psm.proyecto_sm.models.User
 
@@ -29,8 +30,7 @@ object ImageController {
         val bytes = context.contentResolver.openInputStream(uri)?.readBytes()
 
         if (bytes != null) {
-            if (post.images.size < 1) { post.images.add(bytes) }
-            else { post.images[0] = bytes }
+            post.imageA = bytes
         }
     }
 
@@ -38,8 +38,7 @@ object ImageController {
         val bytes = context.contentResolver.openInputStream(uri)?.readBytes()
 
         if (bytes != null) {
-            if (post.images.size < 2) { post.images.add(bytes) }
-            else { post.images[1] = bytes }
+            post.imageB = bytes
         }
     }
 

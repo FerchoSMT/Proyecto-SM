@@ -1,10 +1,18 @@
 package com.psm.proyecto_sm.models
 
-import com.psm.proyecto_sm.Utils.DatabaseHelper
-import com.psm.proyecto_sm.Utils.UserLogged
+import android.content.Context
+import android.os.Build
+import android.util.Log
+import android.widget.Toast
+import androidx.annotation.RequiresApi
+import com.android.volley.Request
+import com.android.volley.toolbox.StringRequest
+import com.psm.proyecto_sm.utils.DatabaseHelper
+import com.psm.proyecto_sm.utils.DataManager
 import com.psm.proyecto_sm.adapters.DraftsAdapter
 import com.psm.proyecto_sm.adapters.PostsAdapter
 import com.psm.proyecto_sm.adapters.RepliesAdapter
+import com.psm.proyecto_sm.utils.DatabaseHost
 
 class User {
     var id_user: Long? = null
@@ -16,19 +24,18 @@ class User {
     var profile_picture: ByteArray? = null
     var register_date: String? = null
 
-    fun signUp(db: DatabaseHelper) {
-        var user_id = db.createUser(this)
-
-        UserLogged.userId = user_id
-        UserLogged.userProfilePic = this.profile_picture
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun signUp(context: Context, url: String) {
+        var db = DatabaseHost()
+        db.createUser(context, url, this)
     }
 
     fun login(db: DatabaseHelper): Boolean {
         var userAux = db.loginUser(this)
 
         if (userAux.id_user != null) {
-            UserLogged.userId = userAux.id_user
-            UserLogged.userProfilePic = userAux.profile_picture
+            DataManager.userId = userAux.id_user
+            DataManager.userProfilePic = userAux.profile_picture
             return true
         }
         else {
@@ -36,10 +43,10 @@ class User {
         }
     }
 
-    fun update(db: DatabaseHelper) {
-        db.updateUser(this)
-
-        UserLogged.userProfilePic = this.profile_picture
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun update(context: Context, url: String) {
+        var db = DatabaseHost()
+        db.updateUser(context, url, this)
     }
 
     fun seePosts(db: DatabaseHelper, adapter: PostsAdapter) {

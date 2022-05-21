@@ -5,9 +5,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.psm.proyecto_sm.R
-import com.psm.proyecto_sm.Utils.ImageController
+import com.psm.proyecto_sm.utils.ImageController
 import com.psm.proyecto_sm.models.Reply
-import com.psm.proyecto_sm.Utils.UserLogged
+import com.psm.proyecto_sm.utils.DataManager
 import kotlinx.android.synthetic.main.item_comment_2.view.*
 
 class RepliesAdapter(val replies: MutableList<Reply>) : RecyclerView.Adapter<RepliesAdapter.RepliesViewHolder>() {
@@ -74,7 +74,7 @@ class RepliesAdapter(val replies: MutableList<Reply>) : RecyclerView.Adapter<Rep
             }
             view.tv_name_comment.setText(reply.name_user)
             view.tv_content_comment.setText(reply.content)
-            if (reply.id_user != UserLogged.userId) {
+            if (reply.id_user != DataManager.userId) {
                 view.tv_settings_comment.visibility = View.GONE
             }
         }

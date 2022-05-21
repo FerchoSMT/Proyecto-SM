@@ -11,10 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.psm.proyecto_sm.R
 import com.psm.proyecto_sm.activities.PostActivity
 import com.psm.proyecto_sm.adapters.PostsAdapter
-import com.psm.proyecto_sm.Utils.DatabaseHelper
+import com.psm.proyecto_sm.utils.DatabaseHelper
 import com.psm.proyecto_sm.models.Post
 import com.psm.proyecto_sm.models.User
-import com.psm.proyecto_sm.Utils.UserLogged
+import com.psm.proyecto_sm.utils.DataManager
 
 
 class ProfilePosts : Fragment(R.layout.fragment_profile_posts) {
@@ -54,7 +54,7 @@ class ProfilePosts : Fragment(R.layout.fragment_profile_posts) {
         })
 
         var userAux = User()
-        userAux.id_user = UserLogged.userId
+        userAux.id_user = DataManager.userId
 
         userAux.seePosts(db, postsAdapter)
     }

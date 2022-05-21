@@ -5,17 +5,33 @@ import android.app.AlertDialog
 import android.app.ProgressDialog
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import com.android.volley.Request
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.psm.proyecto_sm.R
-import com.psm.proyecto_sm.Utils.DatabaseHelper
-import com.psm.proyecto_sm.Utils.ImageController
+import com.psm.proyecto_sm.utils.DatabaseHelper
+import com.psm.proyecto_sm.utils.ImageController
 import com.psm.proyecto_sm.models.Post
-import com.psm.proyecto_sm.Utils.UserLogged
+import com.psm.proyecto_sm.utils.DataManager
+import com.psm.proyecto_sm.utils.NetworkConnection
 import kotlinx.android.synthetic.main.activity_publish.*
+import org.json.JSONObject
+import java.lang.Exception
+import java.util.*
 
 class PublishActivity : AppCompatActivity() {
+
+    val URL_CREATEPOST = "http://cursoswelearn.xyz/phpApi/controllers/cCreatePost.php"
+    val URL_EDITPOST = "http://cursoswelearn.xyz/phpApi/controllers/cUpdatePost.php"
+    val URL_SAVEDRAFT = "http://cursoswelearn.xyz/phpApi/controllers/cSaveDraft.php"
+    private lateinit var URL_UPDATEDRAFT : String
+    private lateinit var URL_READPOST : String
 
     val SELECT_ACTIVITY = 13
     var imageNum = 0
@@ -26,17 +42,27 @@ class PublishActivity : AppCompatActivity() {
     var idPost : Long? = null
     var isDraft : Boolean? = null
 
+    private lateinit var networkConnection: NetworkConnection
+
     private lateinit var progressDialog: ProgressDialog
     private lateinit var builder : AlertDialog.Builder
     private lateinit var db : DatabaseHelper
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_publish)
 
         txt_drafts.setOnClickListener { gotoDrafts() }
         iv_back_publish.setOnClickListener{gotoMain()}
-        iv_confirm_publish.setOnClickListener{postPost()}
+        iv_confirm_publish.setOnClickListener{
+            if (DataManager.isConnected) {
+                postPost()
+            }
+            else {
+                DataManager.connectionAlert(this)
+            }
+        }
         iv_image_publish.setOnClickListener{
             imageNum = 1
             selectImage()
@@ -53,37 +79,30 @@ class PublishActivity : AppCompatActivity() {
         idPost = bundle!!.getLong("IdPost")
         isDraft = bundle!!.getBoolean("IsDraft")
 
-        if (UserLogged.userId != null) {
-            val profilePicBmp = ImageController.getImageBitmap(UserLogged.userProfilePic)
+        if (DataManager.userId != null) {
+            val profilePicBmp = ImageController.getImageBitmap(DataManager.userProfilePic)
             if (profilePicBmp != null) {
                 iv_pfpic_publish.setImageBitmap(profilePicBmp)
             }
         }
 
-        if (idPost!!.toInt() != 0) { infoPost() }
-    }
-
-    private fun infoPost() {
-        postAux = db.readPost(idPost!!)
-
-        txt_drafts.visibility = View.GONE
-        et_title_publish.setText(postAux.title)
-        et_content_post.setText(postAux.content)
-        if (postAux.images.size == 1) {
-            iv_image_publish.setImageBitmap(ImageController.getImageBitmap(postAux.images[0]))
-            iv_image_publish2.visibility = View.VISIBLE
+        if (idPost!!.toInt() != 0) {
+            URL_READPOST = "http://cursoswelearn.xyz/phpApi/controllers/cReadPost.php?Id_Post=" + idPost
+            URL_UPDATEDRAFT = "http://cursoswelearn.xyz/phpApi/controllers/cUpdateDraft.php?Id_Post=" + idPost
+            getPost()
         }
-        else if (postAux.images.size == 2) {
-            iv_image_publish.setImageBitmap(ImageController.getImageBitmap(postAux.images[0]))
-            iv_image_publish2.visibility = View.VISIBLE
-            iv_image_publish2.setImageBitmap(ImageController.getImageBitmap(postAux.images[1]))
+
+        networkConnection = NetworkConnection(application)
+        networkConnection.observe(this) { isConnected ->
+            DataManager.isConnected = isConnected
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun postPost() {
         postAux.title = et_title_publish.text.toString()
         postAux.content = et_content_post.text.toString()
-        postAux.id_user = UserLogged.userId
+        postAux.id_user = DataManager.userId
 
         if (postAux.title!!.isEmpty()) { et_title_publish.setError("Título vacío") }
         else if (postAux.content!!.isEmpty()) { et_content_post.setError("Contenido vacío") }
@@ -99,20 +118,15 @@ class PublishActivity : AppCompatActivity() {
                 ImageController.savePostImage2(this, postAux, it)
             }
 
-            if (isDraft == true) { postAux.updateDraft(db) }
+            if (isDraft == true) { postAux.updateDraft(this, URL_UPDATEDRAFT, idPost!!) }
             else {
-                if (idPost!!.toInt() == 0) { idPost = postAux.create(db) }
-                else { postAux.update(db) }
+                if (idPost!!.toInt() == 0) { postAux.create(this, URL_CREATEPOST) }
+                else { postAux.update(this, URL_EDITPOST) }
             }
-
-            val intent = Intent(this, PostActivity::class.java)
-            intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
-            intent.putExtra("IdPost", idPost)
-            startActivity(intent)
-            finish()
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun gotoMain() {
         if (idPost!!.toInt() == 0) {
             builder = AlertDialog.Builder(this)
@@ -120,7 +134,7 @@ class PublishActivity : AppCompatActivity() {
             builder.setPositiveButton("Guardar") { dialogInterface, which ->
                 postAux.title = et_title_publish.text.toString()
                 postAux.content = et_content_post.text.toString()
-                postAux.id_user = UserLogged.userId
+                postAux.id_user = DataManager.userId
 
                 if (postAux.title!!.isEmpty()) { et_title_publish.setError("Título vacío") }
                 else if (postAux.content!!.isEmpty()) { et_content_post.setError("Contenido vacío") }
@@ -132,15 +146,15 @@ class PublishActivity : AppCompatActivity() {
                         ImageController.savePostImage2(this, postAux, it)
                     }
 
-                    postAux.saveDraft(db)
-
-                    val intent = Intent(this, MainActivity::class.java)
-                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
-                    startActivity(intent)
-                    finish()
+                    postAux.saveDraft(this, URL_SAVEDRAFT)
                 }
             }
-            builder.setNegativeButton("Cancelar") { dialogInterface, which -> }
+            builder.setNegativeButton("Cancelar") { dialogInterface, which ->
+                val intent = Intent(this, MainActivity::class.java)
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+                startActivity(intent)
+                finish()
+            }
             val alertDialog: AlertDialog = builder.create()
             alertDialog.show()
         }
@@ -179,5 +193,64 @@ class PublishActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun getPost() {
+
+        var stringRequest = StringRequest(Request.Method.GET, URL_READPOST, { response ->
+
+            try {
+                var jsonObject = JSONObject(response)
+                postAux.id_post = jsonObject.getLong("id_post")
+                postAux.title = jsonObject.getString("title")
+                postAux.content = jsonObject.getString("content")
+                postAux.favorites = jsonObject.getInt("favorites")
+                postAux.is_draft = jsonObject.getInt("is_draft") == 1
+                postAux.posted_date = jsonObject.getString("posted_date")
+                postAux.is_deleted = jsonObject.getInt("is_deleted") == 1
+                postAux.id_user = jsonObject.getLong("id_user")
+
+                val imageStrA = jsonObject.getString("imageA")
+                if (imageStrA.isNotEmpty()) {
+                    val imageA = imageStrA.replace("data:image/png;base64,", "")
+                    postAux.imageA = Base64.getDecoder().decode(imageA)
+                }
+
+                val imageStrB = jsonObject.getString("imageB")
+                if (imageStrB.isNotEmpty()) {
+                    val imageB = imageStrB.replace("data:image/png;base64,", "")
+                    postAux.imageB = Base64.getDecoder().decode(imageB)
+                }
+
+                postAux.name_user = jsonObject.getString("name_user")
+
+                val imageStrC = jsonObject.getString("img_user")
+                if (imageStrC.isNotEmpty()) {
+                    val imageC = imageStrC.replace("data:image/png;base64,", "")
+                    postAux.img_user = Base64.getDecoder().decode(imageC)
+                }
+
+            } catch (e: Exception) {
+
+            } finally {
+                txt_drafts.visibility = View.GONE
+                et_title_publish.setText(postAux.title)
+                et_content_post.setText(postAux.content)
+                if (postAux.imageA != null) {
+                    iv_image_publish.setImageBitmap(ImageController.getImageBitmap(postAux.imageA))
+                    iv_image_publish2.visibility = View.VISIBLE
+                }
+                if (postAux.imageB != null) {
+                    iv_image_publish2.setImageBitmap(ImageController.getImageBitmap(postAux.imageB))
+                }
+            }
+
+        }, { error ->
+            Toast.makeText(this, error.toString(), Toast.LENGTH_LONG).show()
+        })
+
+        Volley.newRequestQueue(this).add(stringRequest)
+
     }
 }

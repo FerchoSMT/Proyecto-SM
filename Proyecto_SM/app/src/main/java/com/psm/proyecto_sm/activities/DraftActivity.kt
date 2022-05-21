@@ -7,10 +7,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.psm.proyecto_sm.R
 import com.psm.proyecto_sm.adapters.DraftsAdapter
-import com.psm.proyecto_sm.Utils.DatabaseHelper
+import com.psm.proyecto_sm.utils.DatabaseHelper
 import com.psm.proyecto_sm.models.Post
 import com.psm.proyecto_sm.models.User
-import com.psm.proyecto_sm.Utils.UserLogged
+import com.psm.proyecto_sm.utils.DataManager
 import kotlinx.android.synthetic.main.activity_draft.*
 
 class DraftActivity : AppCompatActivity() {
@@ -56,7 +56,7 @@ class DraftActivity : AppCompatActivity() {
         })
 
         var userAux = User()
-        userAux.id_user = UserLogged.userId
+        userAux.id_user = DataManager.userId
 
         userAux.seeDrafts(db, draftsAdapter)
     }
